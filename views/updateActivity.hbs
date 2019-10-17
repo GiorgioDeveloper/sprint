@@ -1,0 +1,30 @@
+<nav>
+
+    <a href="/profile">Profile</a>
+    <a href="/feed">Feed</a>
+    <a href="/teams">Teams</a>
+    <a href="/auth/logout">Logout</a>
+
+</nav>
+
+h1>Update Activity</h1>
+
+<form action="/postActivity/edit/{{activity._id}}" enctype="application/x-www-form-urlencoded" method="POST">
+
+    <select type="text" placeholder="Sport" value="{{activity.sport}}" name="sport" maxlength="25">
+        <option value="run">Run</option>
+        <option value="bike">Bike</option>
+        <option value="swim">Swim</option>
+        <option value="gym">Gym</option>
+        <option value="other">Other</option>
+    </select>
+    <input type="text" placeholder="Description" value="{{activity.description}}" name="description" maxlength="25">
+    <input type="number" placeholder="Distance KM" value="{{activity.distance}}" name="distance"
+        step="0.01"><span>KM</span>
+    <input type="number" min="0" max="100" step="1" placeholder="Hours" value="{{activity.hours}}" name="hours"
+        minlength="1" required value="0"><span>:</span>
+    <input type="number" min="0" max="59" step="1" placeholder="Minutes" value="{{activity.minutes}}" name="minutes"
+        minlength="1" required value="0">
+    <input type="text" placeholder="Location" value="{{activity.location}}" name="location" maxlength="25">
+    <input type="submit">
+</form>

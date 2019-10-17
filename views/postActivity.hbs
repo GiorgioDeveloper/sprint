@@ -1,0 +1,12 @@
+<h1>All the Activities</h1>
+
+
+{{#each posts}}
+
+<ul>
+    <li>sport: {{this.sport}}</li>
+    <li>description: {{this.description}}</li>
+    <li>Made by: {{this.author.name}}</li>
+</ul>
+
+{{/each}}

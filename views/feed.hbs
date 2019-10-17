@@ -1,0 +1,72 @@
+<nav>
+
+    <a href="/profile">Profile</a>
+    <a href="/feed">Feed</a>
+    <a href="/teams">Teams</a>
+    <a href="/auth/logout">Logout</a>
+
+</nav>
+
+<h1>your feed</h1>
+
+
+<script src="moment.js"></script>
+
+<h1>Add an activity</h1>
+
+<form action="/postActivity" enctype="multipart/form-data" method="POST">
+
+    <select type="text" placeholder="Sport" name="sport" maxlength="25">
+        <option value="run">Run</option>
+        <option value="bike">Bike</option>
+        <option value="swim">Swim</option>
+        <option value="gym">Gym</option>
+        <option value="other">Other</option>
+    </select>
+    <input type="text" placeholder="Description" name="description" maxlength="25">
+    <input type="number" min="0" placeholder="Distance KM" name="distance" step="0.01" required
+        value="0"><span>KM</span>
+    <input type="number" min="0" max="100" step="1" placeholder="Hours" name="hours" minlength="1" required
+        value="0"><span>:</span>
+    <input type="number" min="0" max="59" step="1" placeholder="Minutes" name="minutes" minlength="1" required
+        value="0">
+    <input type="text" placeholder="Location" name="location" maxlength="25">
+    <input type="file" name="photo">
+
+    <input type="submit">
+</form>
+
+
+
+
+
+<h1>My activities</h1>
+
+<div class="container">
+
+    <div class="row">
+
+        {{#each posts}}
+
+        <div class="col-4">
+            <div class="card" style="width: 18rem;">
+                <img src="images/album/{{this.photo.photoNameId}}" class="card-img-top" alt="image">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.sport}}</h5>
+                    <p class="card-text">{{this.description}}</p>
+                    <p class="card-text"><span>Distance: </span>{{this.distance}}<span> KM </span></p>
+                    <p class="card-text"><span>Time: </span>{{this.hours}}<span> h </span>{{this.minutes}}<span>
+                            min</span></p>
+                    <p class="card-text">{{this.location}}</p>
+                    <p class="card-text">{{this.dateString}}</p>
+                    <a href="/postActivity/edit/{{this._id}}" class="btn btn-primary anchor">edit</a>
+                    <a href="/postActivity/delete/{{this._id}}" class="btn btn-primary anchor">delete</a>
+                </div>
+            </div>
+        </div>
+
+        {{/each}}
+
+    </div>
+
+</div>

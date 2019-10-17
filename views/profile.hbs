@@ -1,0 +1,31 @@
+<nav>
+
+    <a href="/profile">Profile</a>
+    <a href="/feed">Feed</a>
+    <a href="/teams">Teams</a>
+    <a href="/auth/logout">Logout</a>
+
+</nav>
+
+
+<h1>Hello {{user.username}} this is your profile</h1>
+<p>Name</p>
+<p>image profile</p>
+<p>nr of activity: {{NumActivities}}</p>
+<p>total time: {{totalTime}}hours and {{rminutes}} minutes</p>
+<p>total km {{totalDistance}}</p>
+<p>graph</p>
+<p>teams</p>
+
+<h1>Upload profile Picture</h1>
+
+
+<form action="/profile/profileImg/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="profileImg">
+    <input type="submit" value="Save">
+</form>
+
+
+{{#if user.profileImg}}
+<img src="/images/profile/{{user.profileImg.photoNameId}}" alt="">
+{{/if}}
