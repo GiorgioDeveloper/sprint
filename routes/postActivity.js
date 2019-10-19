@@ -53,7 +53,7 @@ router.post("/", upload.single("photo"), (req, res) => {
       );
     })
     .then(updatedUser => {
-      res.redirect("/feed");
+      res.redirect("/activities");
     });
 });
 
@@ -62,7 +62,7 @@ router.post("/", upload.single("photo"), (req, res) => {
 router.get("/delete/:id", (req, res) => {
   PostActivity.findByIdAndDelete(req.params.id)
     .then(user => {
-      res.redirect("/feed");
+      res.redirect("/activities");
     })
     .catch(err => {
       res.send(err);
@@ -75,6 +75,7 @@ router.get("/edit/:id", (req, res) => {
   //Find activity by id
   //res show form
   PostActivity.findById(req.params.id)
+    .populate("photo")
     .then(activity => {
       res.render("updateActivity", {
         activity: activity,
@@ -86,11 +87,20 @@ router.get("/edit/:id", (req, res) => {
     });
 });
 
-router.post("/edit/:id", (req, res) => {
+router.post("/edit/:id", upload.single("photo"), (req, res) => {
   PostActivity.findByIdAndUpdate({ _id: req.params.id }, req.body)
-
+    .then(newActivity => {
+      if (req.file) {
+        debugger;
+        return Photo.findByIdAndUpdate(newActivity.photo, {
+          photoNameId: req.file.filename,
+          path: req.file.path
+        });
+      }
+      return newActivity;
+    })
     .then(() => {
-      res.redirect("/feed");
+      res.redirect("/activities");
     })
     .catch(err => {
       console.log(err);

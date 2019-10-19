@@ -18,9 +18,10 @@ var indexRouter = require("./routes/index");
 var teamsRouter = require("./routes/teams");
 var authRouter = require("./routes/auth");
 var profileRouter = require("./routes/profile");
-var feedRouter = require("./routes/feed");
+var activitiesRouter = require("./routes/activities");
 var postActivityRouter = require("./routes/postActivity.js");
 var userRouter = require("./routes/users.js");
+var authorise = require("./routes/authorisationMiddleWare");
 
 var app = express();
 
@@ -67,8 +68,8 @@ app.use("/teams", teamsRouter);
 app.use("/auth", authRouter);
 app.use("/profile", profileRouter); // this for logged in user
 app.use("/user", userRouter); // this will be for other users
-app.use("/feed", feedRouter);
-app.use("/postActivity", postActivityRouter);
+app.use("/activities", activitiesRouter);
+app.use("/postActivity", authorise, postActivityRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

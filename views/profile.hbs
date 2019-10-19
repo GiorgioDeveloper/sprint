@@ -1,31 +1,75 @@
-<nav>
-
-    <a href="/profile">Profile</a>
-    <a href="/feed">Feed</a>
-    <a href="/teams">Teams</a>
-    <a href="/auth/logout">Logout</a>
-
-</nav>
-
-
-<h1>Hello {{user.username}} this is your profile</h1>
-<p>Name</p>
-<p>image profile</p>
-<p>nr of activity: {{NumActivities}}</p>
-<p>total time: {{totalTime}}hours and {{rminutes}} minutes</p>
-<p>total km {{totalDistance}}</p>
-<p>graph</p>
-<p>teams</p>
-
-<h1>Upload profile Picture</h1>
+<ul class="nav nav-tabs sticky">
+    <li class="nav-item">
+        <a class="nav-link" href="/activities">Activities</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/profile">Profile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/teams">Teams</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/auth/logout">Logout</a>
+    </li>
+</ul>
 
 
-<form action="/profile/profileImg/upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="profileImg">
-    <input type="submit" value="Save">
-</form>
+<div class="container">
+    <main class="dropdown">
 
 
-{{#if user.profileImg}}
-<img src="/images/profile/{{user.profileImg.photoNameId}}" alt="">
-{{/if}}
+
+
+
+
+        <div class="container">
+            <div class="header">
+                <h2 class="uppercase">HELLO {{user.username}}</h2>
+            </div>
+            <div class="row margin">
+                <div class="card">
+                    <div class=" row no-gutters">
+                        <div class="col-md-4">
+                            {{#if user.profileImg}}
+                            <img src="/images/profile/{{user.profileImg.photoNameId}}" class="card-img" alt="">
+                            {{/if}}
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Personal info</h5>
+
+                                <p class="card-text">{{user.username}}</p>
+                                <p class="card-text">Nr.activity: {{NumActivities}}</p>
+                                <p class="card-text">Total time: {{totalTime}} h {{rminutes}} min</p>
+                                <p class="card-text"> Total KM: {{totalDistance}}</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="header center">
+                <p>UPLOAD YOUR PICTURE</p>
+            </div>
+            <div class="row"></div>
+
+            <form class="input-group mb-3" action="/profile/profileImg/upload" method="post"
+                enctype="multipart/form-data">
+                <div class="custom-file">
+                    <input name="profileImg" type="file" class="custom-file-input" id="inputGroupFile02">
+                    <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                    <button type="submit" class="input-group-text" id="upload-btn">Upload</button>
+                </div>
+            </form>
+
+
+        </div>
+</div>
+
+</main>
+</div>

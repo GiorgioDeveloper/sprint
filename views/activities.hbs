@@ -1,0 +1,165 @@
+<div class="container">
+
+    <ul class="nav nav-tabs sticky">
+        <li class="nav-item">
+            <a class="nav-link" href="/activities">Activities</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/profile">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/teams">Teams</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/auth/logout">Logout</a>
+        </li>
+    </ul>
+
+
+
+
+    <main class="background">
+
+
+
+
+
+
+        {{!-- collapse div --}}
+
+
+
+        {{!-- form NEW Activity collapsed --}}
+
+        <div class="collapse " id="collapseExample">
+            <div class="card">
+                <div class="flex-container dropdown">
+                    <div class="col-4">
+                        <div class="card" style="width: 18rem;">
+
+                            <div class="card-body">
+                                <form action="/postActivity" enctype="multipart/form-data" method="POST">
+
+                                    <div>
+                                        <select type="text" name="sport" class="custom-select mr-sm-2"
+                                            id="inlineFormCustomSelect">
+                                            <option selected>Choose Sport..</option>
+                                            <option value="Run">Run</option>
+                                            <option value="Bike">Bike</option>
+                                            <option value="Swim">Swim</option>
+                                            <option value="Gym">Gym</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    </br>
+                                    <p>Description</p>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="description" maxlength="25">
+                                    </div>
+                                    </br>
+                                    <p>Distance KM</p>
+                                    <div class="col">
+                                        <input type="number" class="form-control" min="0" name="distance" step="0.1"
+                                            required value="0">
+
+                                    </div>
+
+                                    </br>
+                                    <p>Hours</p>
+                                    <div class="col">
+                                        <input type="number" class="form-control" min="0" max="100" step="1"
+                                            name="hours" minlength="1" required value="0">
+                                    </div>
+                                    </br>
+                                    <p>Minutes</p>
+                                    <div class="col">
+                                        <input type="number" class="form-control" min="0" max="59" step="1"
+                                            name="minutes" minlength="1" required value="0">
+                                    </div>
+                                    </br>
+                                    <p>Location</p>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="location" maxlength="25">
+                                    </div>
+                                    </br>
+                                    <p>Upload picture</p>
+
+
+                                    <div>
+                                        <div class="input-group mb-3" <div class="custom-file">
+
+
+                                            <input type="file" name="photo" class="custom-file-input"
+                                                id="inputGroupFile02">
+                                            <label class="custom-file-label" for="inputGroupFile02"
+                                                aria-describedby="inputGroupFileAddon02">Choose
+                                                file</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="submit"
+                                                id="inputGroupFileAddon04" value="Save">Upload</button>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="header">
+
+            <h2>MY ACTIVITIES</h2>
+
+            <a id="activity-btn" class="btn btn-primary my-button" data-toggle="collapse" href="#collapseExample"
+                role="button" aria-expanded="false" aria-controls="collapseExample">
+                NEW Activity+
+            </a>
+        </div>
+
+        <div class="row">
+
+            {{#each posts}}
+
+            <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="images/album/{{this.photo.photoNameId}}" class="card-img-top" height="200px" alt="image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.sport}}</h5>
+                        <p class="card-text">{{this.description}}</p>
+                        <p class="card-text"><span>Distance: </span>{{this.distance}}<span> KM </span></p>
+                        <p class="card-text"><span>Time: </span>{{this.hours}}<span> h
+                            </span>{{this.minutes}}<span>
+                                min</span></p>
+                        <p class="card-text">{{this.location}}</p>
+                        <p class="card-text">{{this.dateString}}</p>
+                        <a href="/postActivity/edit/{{this._id}}" class="btn btn-primary anchor my-button">edit</a>
+                        <a href="/postActivity/delete/{{this._id}}" class="btn btn-primary anchor my-button">delete</a>
+                    </div>
+                </div>
+            </div>
+
+            {{/each}}
+
+        </div>
+
+
+
+
+
+
+
+
+    </main>
+</div>

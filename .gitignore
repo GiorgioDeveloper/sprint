@@ -1,0 +1,4 @@
+node_modules
+.env
+public/images/profile
+public/images/album

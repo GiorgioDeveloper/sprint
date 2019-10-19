@@ -1,30 +1,99 @@
-<nav>
+<ul class="nav nav-tabs sticky">
+    <li class="nav-item">
+        <a class="nav-link" href="/activities">Activities</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/profile">Profile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/teams">Teams</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/auth/logout">Logout</a>
+    </li>
+</ul>
 
-    <a href="/profile">Profile</a>
-    <a href="/feed">Feed</a>
-    <a href="/teams">Teams</a>
-    <a href="/auth/logout">Logout</a>
 
-</nav>
+<div class="container">
+    <main class="dropdown">
+        <div class="header">
+            <h2>UPDATE ACTIVITY</h2>
+        </div>
 
-h1>Update Activity</h1>
 
-<form action="/postActivity/edit/{{activity._id}}" enctype="application/x-www-form-urlencoded" method="POST">
+        {{!-- form --}}
 
-    <select type="text" placeholder="Sport" value="{{activity.sport}}" name="sport" maxlength="25">
-        <option value="run">Run</option>
-        <option value="bike">Bike</option>
-        <option value="swim">Swim</option>
-        <option value="gym">Gym</option>
-        <option value="other">Other</option>
-    </select>
-    <input type="text" placeholder="Description" value="{{activity.description}}" name="description" maxlength="25">
-    <input type="number" placeholder="Distance KM" value="{{activity.distance}}" name="distance"
-        step="0.01"><span>KM</span>
-    <input type="number" min="0" max="100" step="1" placeholder="Hours" value="{{activity.hours}}" name="hours"
-        minlength="1" required value="0"><span>:</span>
-    <input type="number" min="0" max="59" step="1" placeholder="Minutes" value="{{activity.minutes}}" name="minutes"
-        minlength="1" required value="0">
-    <input type="text" placeholder="Location" value="{{activity.location}}" name="location" maxlength="25">
-    <input type="submit">
-</form>
+        <div class="flex-container">
+            <div class="card" style="width: 18rem;">
+                <img src="/images/album/{{activity.photo.photoNameId}}" class="card-img-top" height="200px" alt="image">
+                <div class="card-body">
+                    <form action="/postActivity/edit/{{activity._id}}" enctype="multipart/form-data" method="POST">
+
+                        <div>
+                            <select type="text" name="sport" placeholder="Sport" value="{{activity.sport}}"
+                                class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                <option selected value="{{activity.sport}}">{{activity.sport}}</option>
+                                <option value="Run">Run</option>
+                                <option value="Bike">Bike</option>
+                                <option value="Swim">Swim</option>
+                                <option value="Gym">Gym</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        </br>
+                        <p>Description</p>
+                        <div class="col">
+                            <input type="text" class="form-control" name="description" value="{{activity.description}}"
+                                maxlength="25">
+                        </div>
+                        </br>
+                        <p>Distance KM</p>
+                        <div class="col">
+                            <input type="number" class="form-control" min="0" name="distance"
+                                value="{{activity.distance}}" step="0.1" required value="0">
+
+                        </div>
+
+                        </br>
+                        <p>Hours</p>
+                        <div class="col">
+                            <input type="number" class="form-control" min="0" max="100" step="1" name="hours"
+                                value="{{activity.hours}}" minlength="1" required value="0">
+                        </div>
+                        </br>
+                        <p>Minutes</p>
+                        <div class="col">
+                            <input type="number" class="form-control" min="0" max="59" step="1" name="minutes"
+                                value="{{activity.minutes}}" minlength="1" required value="0">
+                        </div>
+                        </br>
+                        <p>Location</p>
+                        <div class="col">
+                            <input type="text" class="form-control" name="location" value="{{activity.location}}"
+                                maxlength="25">
+                        </div>
+                        </br>
+                        <p>Upload picture</p>
+
+
+                        <div>
+                            <div class="input-group mb-3" class="custom-file">
+
+
+                                <input type="file" name="photo" class="custom-file-input" id="inputGroupFile02">
+                                <label class="custom-file-label" for="inputGroupFile02"
+                                    aria-describedby="inputGroupFileAddon02">Choose
+                                    file</label>
+                            </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04"
+                                    value="Save">Upload</button>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+    </main>
+
+</div>
